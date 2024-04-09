@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <title>Game catalog</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <main>
+
+        <nav>
+            <a href="spiderman.html"> Spiderman 2 </a>
+            <a href="horizon.html"> Hoirzon </a>
+            <a href="god_of_war.html"> God of war </a>
+            <a href="game_picker.html" id="game_picker"> Game picker </a>
+        </nav>
+
+        <h1>Overzicht</h1>
+
+        <div class="container">
+            <div class="dropdown">
+                <button class="dropbtn" onclick="Genre_filter()">Genre</button>
+                <div class="dropdown-content">
+                    <a href="#">FPS</a>
+                    <a href="#">MOBA</a>
+                    <a href="#">Action</a>
+                    <a href="#">RPG</a>
+                    <a href="#">Simulation</a>
+                    <a href="#">Looter-shooter</a>
+                    <a href="#">Sport</a>
+                    <a href="#">Sandbox</a>
+                </div>
+            </div>
+
+                <div class="dropdown">
+                    <button href="#">Rating lager dan</button>
+                    <div class="dropdown-content">
+                        <input name="Rating_input" id ="Rating_filter">
+                        <button class="enter_btn" onclick="Rating_filter()">Enter</button>
+                    </div>
+            </div>
+
+            <div class="dropdown">
+                <button href="#">Prijs lager dan</button>
+                <div class="dropdown-content">
+                    <input type="number" id="Prijs_input">
+                    <button class="enter_btn" onclick="Price_filter()">Enter</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="games">
+
+        </div>
+
+    </main>
+<script src="script.js"></script>
+</body>+
+</html>
