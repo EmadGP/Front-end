@@ -47,7 +47,10 @@ h1 {
 
 .container {
     display: flex;
-    justify-content: space-between;
+}
+
+#winkelmandje {
+    margin-left: auto;
 }
 .right {
     margin-left: auto;
@@ -230,4 +233,10 @@ input:focus {
     box-shadow: 20px 20px 60px #c5c5c5,
     -20px -20px 60px #ffffff;
     width: 100%;
+}
+
+#breken_button {
+    margin-top: 10px;
+    padding: 10px;
+    margin-left: auto;
 }

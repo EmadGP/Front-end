@@ -11,7 +11,6 @@ fetch('games.json')
     .catch(error => console.error('Error fetching JSON:', error));
 
 function Adding_games(added_games,games){
-
     if (games){
         let myDiv = document.getElementById("games")
         myDiv.innerHTML = "";
@@ -41,7 +40,6 @@ function Adding_games(added_games,games){
             genre.textContent = (games[i].genre)
             genre.setAttribute("id", "genre")
 
-
             var price = document.createElement("p")
             price.textContent = (" €" + games[i].price)
             price.setAttribute("id", "price")
@@ -62,35 +60,74 @@ function Adding_games(added_games,games){
                     added_games.push(gameTitle);
                     window.alert("Game added");
 
-                } else {
+                }
+
+                else {
                     const gameTitle = this.getAttribute("data-title");
                     const index = added_games.indexOf(gameTitle);
                     if (index !== -1) {
                         added_games.splice(index, 1);
                     }
                     window.alert("Game removed");
+                    Winkelmandje();
+                    checkbox_checked();
 
                 }
             })
+
+            let winkelmandje = document.getElementById("winkelmandje");
+            winkelmandje.addEventListener("click", checkbox_checked);
         }
+
+
     }
     else {
         console.log("Error")
     }
 }
 
+// <----------------Keep checkbox checked & Breken button----------------->
+function checkbox_checked(){
+    let Page_title = document.getElementById("Page_title");
+    let myDiv = document.getElementById("games")
+
+    Page_title.innerHTML = "Winkelmandje";
+
+    let checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+    checkboxes.forEach(function(checkbox) {
+        const gameTitle = checkbox.getAttribute("data-title");
+
+        if (added_games.includes(gameTitle)) {
+            checkbox.checked = true;
+        }
+    });
+
+    let breken = document.createElement("button")
+    breken.setAttribute("id", "breken_button")
+    breken.setAttribute("onclick", "Breken_prijs()")
+    breken.textContent = "Breken"
+    myDiv.appendChild(breken)
+
+    breken.addEventListener("click", function (){
+        let total_price = Breken_prijs();
+        window.alert("Total price: €" + total_price)
+    })
+}
+// <-----------------Filter on Price------------------>
 function Price_filter() {
     input_price = parseFloat(document.getElementById("Prijs_input").value);
     const filteredGames = games.filter(game => game.price <= input_price);
     Adding_games(added_games,filteredGames);
 }
-
+// <-----------------Filter on Rating------------------>
 function Rating_filter() {
     input_price = parseFloat(document.getElementById("Rating_filter").value);
     const filteredGames = games.filter(game => game.rating <= input_price);
     Adding_games(added_games,filteredGames);
 }
 
+// <-----------------Filter on Genre------------------>
 function Genre_filter() {
     const dropdown = document.querySelector(".dropdown-content");
     dropdown.addEventListener("click", function(event) {
@@ -100,4 +137,34 @@ function Genre_filter() {
             Adding_games(added_games,filteredGames);
         }
     });
+}
+
+// <-----------------Generate Winkelmandje------------------>
+function Winkelmandje() {
+
+    let winkelmandje = document.getElementById("winkelmandje");
+    let filteredGames = [];
+
+    for (var i = 0; i < added_games.length; i++) {
+        const game = games.find(game => game.title === added_games[i]);
+
+        if (game) {
+            filteredGames.push(game);
+        }
+    }
+
+    Adding_games(added_games, filteredGames);
+}
+
+function Breken_prijs() {
+    let total_price = 0;
+
+    for (var i = 0; i < added_games.length; i++) {
+        const game = games.find(game => game.title === added_games[i]);
+
+        if (game) {
+            total_price += game.price;
+        }
+    }
+    return total_price
 }
